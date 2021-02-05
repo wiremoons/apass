@@ -17,7 +17,7 @@
 --   gprclean
 -- 
 
-project apass is
+project Apass is
 
    -- set up for 'debug' and 'release' build options
    type Build_Type is
@@ -55,12 +55,12 @@ project apass is
    end Binder;
 
    package Pretty_Printer is
-      for Default_Switches ("ada") use ("-A1", "-A2", "-A3", "-A4", "-A5", "--no-separate-is", "--no-separate-loop-then");
+      for Default_Switches ("ada") use ("-A1", "-A2", "-A3", "-A4", "-A5", "--no-separate-is", "--no-separate-loop-then", "-cl3", "-nM");
    end Pretty_Printer;
 
    package Ide is
       for Vcs_Kind use "git";
    end Ide;
 
-end apass;
+end Apass;
 
