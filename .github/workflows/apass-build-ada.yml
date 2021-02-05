@@ -1,0 +1,70 @@
+# This is a basic workflow to help you get started with Actions
+
+name: apass
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
+on:
+  push:
+    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on (latest still @ 18.04 on 04 Oc2 2020)
+    #runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:      
+    # Install Ubuntu OS updates
+    - name: Install OS updates, security fixes etc
+      run: |
+        echo "Installing OS updates, security fixes etc"
+        sudo apt update
+        sudo apt -y upgrade
+        sudo apt -y autoremove
+    
+    # Install dependencies and Nim language
+    - name: Install dependencies and Ada language compiler
+      run: |
+        echo "Installing Ada language and dependencies..."
+        sudo apt -y install gnat gprbuild git asis-programs
+        echo "Installing Ada language generally used libraries..."
+        sudo apt -y install libgnatcoll-gmp19 libgnatcoll-gmp18-dev \
+        libgnatcoll18 libgnatcoll18-dev libaws19-dev libcurl4-openssl-dev \
+        liblzma-dev libgnatcoll-iconv18-dev libgnatcoll-readline18-dev \
+        libgnatcoll-sqlite18-dev
+        echo "Installed versions of Ada compiler and tools are:"
+        gnat --version
+        gnatmake --version
+        gprbuild --version
+        gnatls -v
+        
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+        
+    # Runs a set of commands using the runners shell - include env secret key
+    - name: Run a multi-line script
+      #env:
+      #    DSAPI: ${{ secrets.DSAPI }}
+      run: |
+        echo "Building the project..."
+        pwd
+        ls
+        gprbuild -XBUILD=release
+        cd bin/
+        ./apass
+        ./apass --version
+        ./apass --help
+        echo "DONE."
+
+    # Saves built file as a release.
+    - name: Upload artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: release
+        path: bin

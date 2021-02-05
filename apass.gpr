@@ -1,0 +1,66 @@
+-------------------------------------------------------------------------------
+-- BUILD FILE  : apass                                                       --
+-- Description : A CLI password generator written in Ada.                    --
+-- Author      : Simon Rowe <simon@wiremoons.com>                            --
+-- License     : MIT Open Source.                                            --
+-------------------------------------------------------------------------------
+
+-- To execute this file requires the Ada Core tool: gprbuild 
+--
+-- For a 'release' build (default) run:
+--   gprbuild -XBUILD=release
+--
+-- For a 'debug' build run:
+--   gprbuild -XBUILD=debug
+--
+-- To reset and clean up run: 
+--   gprclean
+-- 
+
+project apass is
+
+   -- set up for 'debug' and 'release' build options
+   type Build_Type is
+      ("release", "debug");
+   Build : Build_Type := external ("BUILD", "debug");
+
+   -- set up for project directory structure 
+   for Languages use ("Ada");
+   for Source_Dirs use ("src/**");
+   for Object_Dir use "obj";
+   for Exec_Dir use "bin";
+   for Main use ("apass.adb");
+   for Create_Missing_Dirs use "True";
+
+   -- static build to include 'gnatlib'
+   package Compiler is
+
+      case Build is
+
+         when "release" =>
+            for Switches ("ada") use ("-gnatVa", "-gnatwa", "-O3", "-gnatf", "-gnato", "-fstack-check", "-fPIC", "-static");
+
+         when "debug" =>
+            for Switches ("ada") use ("-gnatVa", "-gnatwa", "-g", "-O0", "-gnatf", "-gnata", "-gnato", "-fstack-check", "-static");
+      end case;
+   end Compiler;
+
+   package Builder is
+      for Switches ("ada") use ("-s", "-j0");
+   end Builder;
+
+   -- static build to include 'gnatlib'
+   package Binder is
+      for Switches ("ada") use ("-Es", "-g", "-static");
+   end Binder;
+
+   package Pretty_Printer is
+      for Default_Switches ("ada") use ("-A1", "-A2", "-A3", "-A4", "-A5", "--no-separate-is", "--no-separate-loop-then");
+   end Pretty_Printer;
+
+   package Ide is
+      for Vcs_Kind use "git";
+   end Ide;
+
+end apass;
+
