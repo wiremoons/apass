@@ -14,6 +14,8 @@ package body Password_Manager is
    subtype Word is String (1 .. 3);
    type Word_List is array (Positive range <>) of Word;
 
+   --!pp off
+   -- disable gnatpp formatting of array block below
    Words_List_Array : constant Word_List :=
      ("aah", "aal", "aas", "aba", "abb", "abo", "abs", "aby", "ace", "ach",
       "act", "add", "ado", "ads", "adz", "aff", "aft", "aga", "age", "ago",
@@ -147,6 +149,8 @@ package body Password_Manager is
       "zap", "zas", "zax", "zea", "zed", "zee", "zek", "zel", "zep", "zex",
       "zho", "zig", "zin", "zip", "zit", "ziz", "zoa", "zol", "zoo", "zos",
       "zuz", "zzz");
+   --!pp on
+   -- re-enable gnatpp formatting
 
    -- Add ability to obtain a random number within the range of the
    -- array length for Words_List_Array as declared above
