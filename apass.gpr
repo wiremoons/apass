@@ -17,7 +17,7 @@
 --   gprclean
 --
 -- To format code file with Pretty Print (gnatpp) run:
---   gnatpp -Padbt.gpr
+--   gnatpp -Papass.gpr
 --
 
 project Apass is
@@ -57,7 +57,7 @@ project Apass is
       for Switches ("ada") use ("-Es", "-g", "-static");
    end Binder;
 
-   -- to apply run :  gnatpp -Padbt.gpr
+   -- to apply run :  gnatpp -Papass.gpr
    package Pretty_Printer is
       for Default_Switches ("ada") use ("-i3", "-M120", "-v", "-w", "-rnb", "-A1", "-A2", "-A3", "-A4", "-A5", "--no-separate-is", "--no-separate-loop-then");
    end Pretty_Printer;
