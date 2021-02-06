@@ -5,7 +5,7 @@
 -- License     : MIT Open Source.                                            --
 -------------------------------------------------------------------------------
 
-with Ada.Text_Io; use Ada.Text_Io;
+with Ada.Text_IO;           use Ada.Text_IO;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Ada.Numerics.Discrete_Random;
 
@@ -175,17 +175,17 @@ package body Password_Manager is
       -- specific by Number_of_Words.
       ------------------------------------------------------------------------
 
-      Random_Number : Integer := 0;
-      Password_Str : Unbounded_String := Null_Unbounded_String;
+      Random_Number : Integer          := 0;
+      Password_Str  : Unbounded_String := Null_Unbounded_String;
 
    begin
-      Put_Line ("Words to obtain: " & Integer'Image(Number_Of_Words));
+      Put_Line ("Words to obtain: " & Integer'Image (Number_Of_Words));
       Randomint.Reset (Gen => Gen);
 
       for I in 1 .. Number_Of_Words loop
          Random_Number := Randomint.Random (Gen => Gen);
          Put_Line ("Random number: " & Integer'Image (Random_Number));
-         Password_Str := Password_Str & Words_List_Array(Random_Number);
+         Password_Str := Password_Str & Words_List_Array (Random_Number);
       end loop;
 
       return To_String (Password_Str);
