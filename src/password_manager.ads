@@ -7,7 +7,7 @@
 
 package Password_Manager is
 
-   function Total_Words Return string;
+   function Total_Words return String;
    function Basic_Password (Number_Of_Words : Positive := 3) return String;
 
 end Password_Manager;
