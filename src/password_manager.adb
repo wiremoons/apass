@@ -155,23 +155,12 @@ package body Password_Manager is
    -- Add ability to obtain a random number within the range of the
    -- array length for Words_List_Array as declared above
    subtype Max_Words is Integer range 1 .. (Words_List_Array'Length);
-   package Randomint is new Ada.Numerics.Discrete_Random (Max_Words);
-   Gen : Randomint.Generator;
-
-   function Total_Words return String is
-   ------------------------------------------------------------------------
-   -- Total_Words returns the total number of three letter words available to
-   -- be used to construct passwords.
-   ------------------------------------------------------------------------
-   begin
-
-      return Integer'Image (Words_List_Array'Length);
-
-   end Total_Words;
+   package Random_Word_Int is new Ada.Numerics.Discrete_Random (Max_Words);
+   Gen : Random_Word_Int.Generator;
 
    function Basic_Password (Number_Of_Words : Positive := 3) return String is
       ------------------------------------------------------------------------
-      -- Basic_Password generates a password generated from the number of words
+      -- Basic_Password generates a password from the number of words
       -- specific by Number_of_Words.
       ------------------------------------------------------------------------
 
@@ -180,10 +169,10 @@ package body Password_Manager is
 
    begin
       Put_Line ("Words to obtain: " & Integer'Image (Number_Of_Words));
-      Randomint.Reset (Gen => Gen);
+      Random_Word_Int.Reset (Gen => Gen);
 
       for I in 1 .. Number_Of_Words loop
-         Random_Number := Randomint.Random (Gen => Gen);
+         Random_Number := Random_Word_Int.Random (Gen => Gen);
          Put_Line ("Random number: " & Integer'Image (Random_Number));
          Password_Str := Password_Str & Words_List_Array (Random_Number);
       end loop;
@@ -191,5 +180,27 @@ package body Password_Manager is
       return To_String (Password_Str);
 
    end Basic_Password;
+
+
+   function Get_Random_Number return integer is
+   ------------------------------------------------------------------------
+   -- GetRandom_Number returns a random number  
+   -- from the 'Words_List_Array' used to construct passwords.
+   ------------------------------------------------------------------------
+   null;
+   end Get_Random_Number;
+
+   function Total_Words return String is
+   ------------------------------------------------------------------------
+   -- Total_Words returns the total number of three letter words available 
+   -- from the 'Words_List_Array' used to construct passwords.
+   ------------------------------------------------------------------------
+   begin
+
+      return Integer'Image (Words_List_Array'Length);
+
+   end Total_Words;
+
+
 
 end Password_Manager;
