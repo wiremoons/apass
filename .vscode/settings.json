@@ -1,5 +1,4 @@
 {
-    "ada.trace.server": "verbose",
     "ada.projectFile": "apass.gpr",
     "cSpell.words": [
         "Array'Length",
