@@ -22,5 +22,6 @@ begin
    Put_Line ("Program 'apass' running...");
    Put_Line ("Total words available: " & Password_Manager.Total_Words);
    Put_Line (Password_Manager.Basic_Password (3));
+   Put_Line (Item => "Random number is: " & Integer'Image (Password_Manager.Get_Random_Number));
 
 end Apass;
