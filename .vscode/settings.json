@@ -1,8 +1,11 @@
 {
+    "ada.trace.server": "verbose",
+    "ada.projectFile": "apass.gpr",
     "cSpell.words": [
         "Array'Length",
         "Integer'Image",
         "Randomint",
-        "apass"
+        "apass",
+        "gnatpp"
     ]
 }
