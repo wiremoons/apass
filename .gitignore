@@ -27,5 +27,7 @@ KEYS.txt
 # Any 'aspell' back up files are excluded
 *.bak
 
-# Any 'debug.txt' file
+# Any 'debug' files
 debug.txt
+debug.out
+debug.stderr
