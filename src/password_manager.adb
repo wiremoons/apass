@@ -7,6 +7,7 @@
 
 with Ada.Text_IO;           use Ada.Text_IO;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+with Ada.Strings.Fixed;
 with Ada.Numerics.Discrete_Random;
 
 package body Password_Manager is
@@ -175,12 +176,18 @@ package body Password_Manager is
 
    begin
 
-      Put_Line ("Words to obtain: " & Integer'Image (Number_Of_Words));
+      pragma Debug (Put_Line (Standard_Error, "[DEBUG] Words to obtain: " & Integer'Image (Number_Of_Words)));
       Random_Word_Int.Reset (Gen => Gen_Word);
 
       for I in 1 .. Number_Of_Words loop
          Random_Number := Random_Word_Int.Random (Gen => Gen_Word);
-         Put_Line ("Random number: " & Integer'Image (Random_Number));
+         pragma Debug
+           (Put_Line
+              (Standard_Error,
+               "[DEBUG] Random number:" &
+               Integer'Image (Random_Number) &
+               " is word: " &
+               Words_List_Array (Random_Number)));
          Password_Str := Password_Str & Words_List_Array (Random_Number);
       end loop;
 
@@ -188,15 +195,16 @@ package body Password_Manager is
 
    end Basic_Password;
 
-   function Get_Random_Number return Integer is
+   function Get_Random_Number return String is
    ------------------------------------------------------------------------
-   -- GetRandom_Number returns a random number
-   -- from the 'Words_List_Array' used to construct passwords.
+   -- GetRandom_Number returns a random number converted to a string.
+   -- Selected from the 'Random_Num_Int' range. Leading Integer space 
+   -- trimmed from string as well.
    ------------------------------------------------------------------------
    begin
 
       Random_Integer.Reset (Gen => Gen_Int);
-      return Random_Integer.Random (Gen => Gen_Int);
+      return (Ada.Strings.Fixed.Trim (Random_Integer.Random (Gen => Gen_Int)'Image, Ada.Strings.Left));
 
    end Get_Random_Number;
 
