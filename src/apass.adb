@@ -26,7 +26,7 @@ begin
 
    Put_Line ("Program 'apass' running...");
    Put_Line ("Total words available: " & Password_Manager.Total_Words);
-    New_Line (1);
+   New_Line (1);
 
    while Total_Passwords > 0 loop
       Full_Password_Str := To_Unbounded_String (Password_Manager.Get_Random_Number);
