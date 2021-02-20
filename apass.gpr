@@ -59,7 +59,7 @@ project Apass is
 
    -- to apply run :  gnatpp -Papass.gpr
    package Pretty_Printer is
-      for Default_Switches ("ada") use ("-i3", "-M120", "-v", "-w", "-rnb", "-A1", "-A2", "-A3", "-A4", "-A5", "--no-separate-is", "--no-separate-loop-then");
+      for Default_Switches ("ada") use ("-i3", "-M120", "-v", "-w", "-rnb", "-A1", "-A2", "-A3", "-A4", "-A5", "--no-separate-is", "--no-separate-loop-then", "-c3");
    end Pretty_Printer;
 
    package Ide is
