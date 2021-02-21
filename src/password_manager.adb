@@ -12,7 +12,7 @@ with Ada.Numerics.Discrete_Random;
 
 package body Password_Manager is
 
-   --  Add ability to obtain a random number within the range of the array length for Words_List_Array as declared above
+   --  Add ability to obtain a random number within the range of the array length for Words_List_Array as spec source
    subtype Max_Words is Integer range 1 .. (Words_List_Array'Length);
    package Random_Word_Int is new Ada.Numerics.Discrete_Random (Max_Words);
    Gen_Word : Random_Word_Int.Generator;
@@ -21,6 +21,11 @@ package body Password_Manager is
    subtype Random_Num_Int is Integer range 0 .. 99;
    package Random_Integer is new Ada.Numerics.Discrete_Random (Random_Num_Int);
    Gen_Int : Random_Integer.Generator;
+
+   --  Add ability to obtain a random number within the range of the array length for Marks_List_Array as spec source
+   subtype Max_Marks is Integer range 1 .. (Marks_List_Array'Length);
+   package Random_Marks_Int is new Ada.Numerics.Discrete_Random (Max_Marks);
+   Gen_Mark : Random_Marks_Int.Generator;
 
    function Basic_Password (Number_Of_Words : Positive := 3) return String is
       ------------------------------------------------------------------------------------------------------------------
@@ -41,7 +46,9 @@ package body Password_Manager is
          pragma Debug
            (Put_Line
               (Standard_Error,
-               "[DEBUG] Random number:" & Integer'Image (Random_Number) & " is word: " &
+               "[DEBUG] Random number:" &
+               Integer'Image (Random_Number) &
+               " is word: " &
                Words_List_Array (Random_Number)));
          Password_Str := Password_Str & Words_List_Array (Random_Number);
       end loop;
@@ -52,7 +59,7 @@ package body Password_Manager is
 
    function Get_Random_Number return String is
    ---------------------------------------------------------------------------------------------------------------------
-   --  GetRandom_Number returns a random number converted to a string. Selected from the 'Random_Num_Int' range.      --
+   --  Get_Random_Number returns a random number converted to a string. Selected from the 'Random_Num_Int' range.     --
    --  Leading Integer space trimmed from string before it is returned.                                               --
    ---------------------------------------------------------------------------------------------------------------------
    begin
@@ -61,6 +68,18 @@ package body Password_Manager is
       return (Ada.Strings.Fixed.Trim (Random_Integer.Random (Gen => Gen_Int)'Image, Ada.Strings.Left));
 
    end Get_Random_Number;
+
+   function Get_Random_Mark return String is
+   ---------------------------------------------------------------------------------------------------------------------
+   --  Get_Random_Mark returns a random string (single character) selected from the 'Random_Marks_Int' range.         --
+   --  The selected random string is obtained from the Marks_List_Array contained in spec file.                       --
+   ---------------------------------------------------------------------------------------------------------------------
+   begin
+   
+      Random_Marks_Int.Reset (Gen => Gen_Mark);
+      return (Marks_List_Array (Random_Marks_Int.Random (Gen => Gen_Mark)));
+
+   end Get_Random_Mark;
 
    function Total_Words return String is
    ---------------------------------------------------------------------------------------------------------------------

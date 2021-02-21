@@ -30,12 +30,15 @@ begin
 
    while Total_Passwords > 0 loop
       Full_Password_Str := To_Unbounded_String (Password_Manager.Get_Random_Number);
+      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Mark);
       Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Basic_Password (3));
+      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Mark);
       Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Number);
       Put_Line (To_String (Full_Password_Str));
 
       Total_Passwords := Total_Passwords - 1;
 
    end loop;
+
 
 end Apass;

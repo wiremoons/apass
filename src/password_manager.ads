@@ -8,10 +8,13 @@
 package Password_Manager is
 
    function Basic_Password (Number_Of_Words : Positive := 3) return String;
-   --  obtain password string of Number_Of_Words in length
+   --  obtain password string of Number_Of_Words in length from Words_List_Array
 
    function Get_Random_Number return String;
    --  obtain a random number in range Random_Num_Int as a trimmed string
+
+   function Get_Random_Mark return String;
+   --  obtain string (single punctuation character) from Marks_List_Array
 
    function Total_Words return String;
    --  obtain the total number of words in the Words_List_Array as trimmed string
@@ -19,18 +22,14 @@ package Password_Manager is
 private
 
    ---------------------------------------------------------------------------------------------------------------------
-   --  Words_List_Array used to construct passwords into a randomly generated string. Private to ensure it is only    --
+   --  Mark_List_Array used to construct passwords into a randomly generated string. Private to ensure it is only    --
    --  accessed via functions in the Password_Manager package.                                                        --
    ---------------------------------------------------------------------------------------------------------------------
-   --subtype Word is String (1 .. 3);
-   --type Word_List is array (Positive range <>) of Word;
+   subtype Mark is String (1 .. 1);
+   type Marks_List is array (Positive range <>) of Mark;
 
-   --!pp off
-   --  disable gnatpp formatting of array block below
-   --Words_List_Array : constant Word_List :=
-
-
-
+   Marks_List_Array : constant Marks_List := ("#", ".", ";", "@", "%", ":", "!", ">", "-", "<");
+   
    ---------------------------------------------------------------------------------------------------------------------
    --  Words_List_Array used to construct passwords into a randomly generated string. Private to ensure it is only    --
    --  accessed via functions in the Password_Manager package.                                                        --
