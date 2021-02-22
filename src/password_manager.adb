@@ -78,8 +78,8 @@ package body Password_Manager is
 
       for I in 1 .. Number_Of_Words loop
          Random_Number := Random_Word_Int.Random (Gen => Gen_Word);
-         pragma Debug (Put (Standard_Error,"[DEBUG] Random number:" & Integer'Image (Random_Number))); 
-         pragma Debug (Put_Line (Standard_Error," is word: " & Words_List_Array (Random_Number)));
+         pragma Debug (Put (Standard_Error, "[DEBUG] Random number:" & Integer'Image (Random_Number)));
+         pragma Debug (Put_Line (Standard_Error, " is word: " & Words_List_Array (Random_Number)));
          Password_Str := Password_Str & Title_Case_String (Words_List_Array (Random_Number));
       end loop;
 
@@ -87,18 +87,16 @@ package body Password_Manager is
 
    end Capitilised_Password;
 
-
    function Title_Case_String (Input_Str : String) return String is
    begin
 
-      if Input_Str'length = 0 then 
+      if Input_Str'Length = 0 then
          return Input_Str;
-      else 
+      else
          return To_Upper (Input_Str (Input_Str'First)) & To_Lower (Input_Str (Input_Str'First + 1 .. Input_Str'Last));
       end if;
-      
-   end Title_Case_String;
 
+   end Title_Case_String;
 
    procedure Print_Password (Final_Password : String) is
    ---------------------------------------------------------------------------------------------------------------------
@@ -118,7 +116,7 @@ package body Password_Manager is
 
          if Is_Digit (Final_Password (C)) then
             -- ouput of numbers in colour
-            -- pragma Debug (Put (Standard_Error, " [DEBUG] DIGIT: " & Final_Password (C)));
+            --  pragma Debug (Put (Standard_Error, " [DEBUG] DIGIT: " & Final_Password (C)));
             if Screen.Has_Colors then
                Screen.Set_Fg (Color => Green, Term => Standard_Output);
                Put (Final_Password (C));
@@ -128,7 +126,7 @@ package body Password_Manager is
             end if;
          elsif Is_Punctuation_Connector (Final_Password (C)) or Is_Special (Final_Password (C)) then
             --  outut of punctuation characters including '_'
-            -- pragma Debug (Put (Standard_Error, " [DEBUG] MARK: " & Final_Password (C)));
+            --  pragma Debug (Put (Standard_Error, " [DEBUG] MARK: " & Final_Password (C)));
             if Screen.Has_Colors then
                Screen.Set_Fg (Color => Blue, Term => Standard_Output);
                Put (Final_Password (C));
@@ -138,11 +136,11 @@ package body Password_Manager is
             end if;
          elsif Is_Letter (Final_Password (C)) then
             --  output of any characters 'a .. z' or 'A .. Z' : NO COLOUR USED
-            -- pragma Debug (Put (Standard_Error, " [DEBUG] LETTER: " & Final_Password (C)));
+            --  pragma Debug (Put (Standard_Error, " [DEBUG] LETTER: " & Final_Password (C)));
             Put (Final_Password (C));
          else
             --  output of anyting else not covered by the above specifics
-            -- pragma Debug (Put (Standard_Error, " [DEBUG] OTHER: " & Final_Password (C)));
+            --  pragma Debug (Put (Standard_Error, " [DEBUG] OTHER: " & Final_Password (C)));
             if Screen.Has_Colors then
                Screen.Set_Fg (Color => Cyan, Term => Standard_Output);
                Put (Final_Password (C));
@@ -156,7 +154,7 @@ package body Password_Manager is
       --  flush all outputs issued with 'Put' only above
       --Put_Line (" ");
       Put ("   ");
-      
+
       --  reset screen outputs to snsure back to normal
       if Screen.Has_Colors then
          Set_Color
@@ -176,18 +174,19 @@ package body Password_Manager is
    --  Leading Integer space trimmed from string before it is returned.                                               --
    --  TODO: if single digit random number add a leading zero so always is 'length = 2                                --
    ---------------------------------------------------------------------------------------------------------------------
-   Tmp_Str : Unbounded_String := Null_Unbounded_String;
-   
+      Tmp_Str : Unbounded_String := Null_Unbounded_String;
+
    begin
 
       Random_Integer.Reset (Gen => Gen_Int);
 
-      Tmp_Str := To_Unbounded_String (Ada.Strings.Fixed.Trim (Random_Integer.Random (Gen => Gen_Int)'Image, Ada.Strings.Left));
+      Tmp_Str :=
+        To_Unbounded_String (Ada.Strings.Fixed.Trim (Random_Integer.Random (Gen => Gen_Int)'Image, Ada.Strings.Left));
 
-      pragma Debug (Put_Line (Standard_Error,"[DEBUG] Random integer: " & To_String(Tmp_Str)));
+      pragma Debug (Put_Line (Standard_Error, "[DEBUG] Random integer: " & To_String (Tmp_Str)));
 
-      if Length(Tmp_Str) /= 2 then
-         Insert(Tmp_Str,1,"0");
+      if Length (Tmp_Str) /= 2 then
+         Insert (Tmp_Str, 1, "0");
          return To_String (Tmp_Str);
       else
          return To_String (Tmp_Str);
@@ -224,9 +223,10 @@ begin
    Screen.Init_For_Stdout (Auto);
    Screen.Init_For_Stderr (Auto);
    --  show colour output capabilities in debug mode
-   pragma Debug (Put_Line (Standard_Error,"[DEBUG] Checking for colour terminal support..."));
-   pragma Debug (Put_Line (Standard_Error,"[DEBUG] Colour support: " & (if Screen.Has_Colors then "YES" else "NO")));
-   pragma Debug (Put_Line (Standard_Error,"[DEBUG] ANSI support: " & (if Screen.Has_ANSI_Colors then "YES" else "NO")));
+   pragma Debug (Put_Line (Standard_Error, "[DEBUG] Checking for colour terminal support..."));
+   pragma Debug (Put_Line (Standard_Error, "[DEBUG] Colour support: " & (if Screen.Has_Colors then "YES" else "NO")));
+   pragma Debug
+     (Put_Line (Standard_Error, "[DEBUG] ANSI support: " & (if Screen.Has_ANSI_Colors then "YES" else "NO")));
    Screen.Clear_To_End_Of_Line;
 
 end Password_Manager;
