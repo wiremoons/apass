@@ -8,7 +8,10 @@
 package Password_Manager is
 
    function Basic_Password (Number_Of_Words : Positive := 3) return String;
-   --  obtain password string of Number_Of_Words in length from Words_List_Array
+   --  obtain all lowercase password string of Number_Of_Words in length from Words_List_Array
+
+   function Capitilised_Password (Number_Of_Words : Positive := 3) return String;
+   --  obtain capitalised per word password string of Number_Of_Words in length from Words_List_Array
 
    function Get_Random_Number return String;
    --  obtain a random number in range Random_Num_Int as a trimmed string
@@ -19,6 +22,11 @@ package Password_Manager is
    function Total_Words return String;
    --  obtain the total number of words in the Words_List_Array as trimmed string
 
+   procedure Print_Password (Final_Password : String);
+   --  outputs the provided password string string colour text if supported
+
+   function Title_Case_String (Input_Str : String) return String;
+   
 private
 
    ---------------------------------------------------------------------------------------------------------------------

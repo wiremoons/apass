@@ -20,6 +20,9 @@
 --   gnatpp -Papass.gpr
 --
 
+--  Required to support the use of: GNATCOLL.Terminal
+with "gnatcoll";
+
 project Apass is
 
    -- set up for 'debug' and 'release' build options

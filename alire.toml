@@ -1,6 +1,6 @@
 name = "apass"
 description = "A CLI password generator written in Ada."
-version = "0.0.3"
+version = "0.0.4"
 
 authors = ["Simon Rowe"]
 maintainers = ["Simon Rowe <simon@wiremoons.com>"]
