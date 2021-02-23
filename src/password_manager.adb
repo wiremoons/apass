@@ -48,14 +48,9 @@ package body Password_Manager is
 
       for I in 1 .. Number_Of_Words loop
          Random_Number := Random_Word_Int.Random (Gen => Gen_Word);
-         pragma Debug
-           (Put_Line
-              (Standard_Error,
-               "[DEBUG] Random number:" &
-               Integer'Image (Random_Number) &
-               " is word: " &
-               Words_List_Array (Random_Number)));
-         Password_Str := Password_Str & Words_List_Array (Random_Number);
+         pragma Debug (Put (Standard_Error, "[DEBUG] Random number:" & Integer'Image (Random_Number)));
+         pragma Debug (Put_Line (Standard_Error, " is word: " & Words_List_Array (Random_Number)));
+         Append (Password_Str, Words_List_Array (Random_Number));
       end loop;
 
       return To_String (Password_Str);
@@ -64,8 +59,8 @@ package body Password_Manager is
 
    function Capitilised_Password (Number_Of_Words : Positive := 3) return String is
       ------------------------------------------------------------------------------------------------------------------
-      --  Basic_Password generates a password from the number of words specified by value of function param           --
-      --  Number_of_Words (default 3). Words are concatenated into a string that is returned.                         --
+      --  Capitilised_Password generates a password from the number of words specified by value of function param     --
+      --  Number_of_Words (default 3). Words are title cased and are concatenated into a string that is returned.     --
       ------------------------------------------------------------------------------------------------------------------
 
       Random_Number : Integer          := 0;
@@ -80,7 +75,7 @@ package body Password_Manager is
          Random_Number := Random_Word_Int.Random (Gen => Gen_Word);
          pragma Debug (Put (Standard_Error, "[DEBUG] Random number:" & Integer'Image (Random_Number)));
          pragma Debug (Put_Line (Standard_Error, " is word: " & Words_List_Array (Random_Number)));
-         Password_Str := Password_Str & Title_Case_String (Words_List_Array (Random_Number));
+         Append (Password_Str, Title_Case_String (Words_List_Array (Random_Number)));
       end loop;
 
       return To_String (Password_Str);
@@ -88,6 +83,11 @@ package body Password_Manager is
    end Capitilised_Password;
 
    function Title_Case_String (Input_Str : String) return String is
+   ------------------------------------------------------------------------------------------------------------------
+   --  Title_Case_String converts the first letter of the string provided to an upper case letter.                 --
+   --  The converted string is returned. If the string is zero length it is just returned as is.                   --
+   ------------------------------------------------------------------------------------------------------------------
+
    begin
 
       if Input_Str'Length = 0 then
@@ -172,7 +172,7 @@ package body Password_Manager is
    ---------------------------------------------------------------------------------------------------------------------
    --  Get_Random_Number returns a random number converted to a string. Selected from the 'Random_Num_Int' range.     --
    --  Leading Integer space trimmed from string before it is returned.                                               --
-   --  TODO: if single digit random number add a leading zero so always is 'length = 2                                --
+   --  If a single digit random number is generated a leading zero is added so it always returns 'length = 2          --
    ---------------------------------------------------------------------------------------------------------------------
       Tmp_Str : Unbounded_String := Null_Unbounded_String;
 
@@ -217,7 +217,7 @@ package body Password_Manager is
 
    end Total_Words;
 
--- Setup
+--  Setup the package by enabling screen handle
 begin
    --  initialise screen outputs wanted for colour support
    Screen.Init_For_Stdout (Auto);

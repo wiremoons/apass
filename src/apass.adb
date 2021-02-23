@@ -34,10 +34,11 @@ begin
    --  output of mixed lowercase with two punctuation marks and two random numbers surrounding the string
    while Total_Passwords > 0 loop
       Full_Password_Str := To_Unbounded_String (Password_Manager.Get_Random_Number);
-      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Mark);
-      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Basic_Password (Number_Of_Words));
-      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Mark);
-      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Number);
+      --Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Mark);
+      Append (Full_Password_Str, To_Unbounded_String (Password_Manager.Get_Random_Mark));
+      Append (Full_Password_Str, To_Unbounded_String (Password_Manager.Basic_Password (Number_Of_Words)));
+      Append (Full_Password_Str, To_Unbounded_String (Password_Manager.Get_Random_Mark));
+      Append (Full_Password_Str, To_Unbounded_String (Password_Manager.Get_Random_Number));
       Password_Manager.Print_Password (To_String (Full_Password_Str));
       Total_Passwords := Total_Passwords - 1;
    end loop;
@@ -48,8 +49,8 @@ begin
    --  output of mixed lowercase with two punctuation marks and two random numbers surrounding the string
    while Total_Passwords > 0 loop
       Full_Password_Str := To_Unbounded_String (Password_Manager.Basic_Password (Number_Of_Words));
-      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Mark);
-      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Number);
+      Append (Full_Password_Str, To_Unbounded_String (Password_Manager.Get_Random_Mark));
+      Append (Full_Password_Str, To_Unbounded_String (Password_Manager.Get_Random_Number));
       Password_Manager.Print_Password (To_String (Full_Password_Str));
       Total_Passwords := Total_Passwords - 1;
    end loop;
@@ -60,8 +61,8 @@ begin
    --  output of mixed lowercase with two punctuation marks and two random numbers surrounding the string
    while Total_Passwords > 0 loop
       Full_Password_Str := To_Unbounded_String (Password_Manager.Capitilised_Password (Number_Of_Words));
-      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Mark);
-      Full_Password_Str := Full_Password_Str & To_Unbounded_String (Password_Manager.Get_Random_Number);
+      Append (Full_Password_Str, To_Unbounded_String (Password_Manager.Get_Random_Mark));
+      Append (Full_Password_Str, To_Unbounded_String (Password_Manager.Get_Random_Number));
       Password_Manager.Print_Password (To_String (Full_Password_Str));
       Total_Passwords := Total_Passwords - 1;
    end loop;
