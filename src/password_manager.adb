@@ -116,7 +116,11 @@ package body Password_Manager is
       --  with a bold white background - rest here fixes that.
       if Screen.Has_Colors then
          Set_Color
-           (Self => Screen, Term => Standard_Output, Style => Reset_All, Foreground => Reset, Background => Reset);
+           (Self       => Screen,
+            Term       => Standard_Output,
+            Style      => Reset_All,
+            Foreground => Reset,
+            Background => Reset);
          pragma Debug (Put_Line (Standard_Error, "[DEBUG] Reset : 'Set_Color'"));
       end if;
 
@@ -166,7 +170,11 @@ package body Password_Manager is
       --  reset screen outputs to ensure back to normal
       if Screen.Has_Colors then
          Set_Color
-           (Self => Screen, Term => Standard_Output, Style => Reset_All, Foreground => Reset, Background => Reset);
+           (Self       => Screen,
+            Term       => Standard_Output,
+            Style      => Reset_All,
+            Foreground => Reset,
+            Background => Reset);
          pragma Debug (Put_Line (Standard_Error, "[DEBUG] Reset : 'Set_Color'"));
       end if;
 

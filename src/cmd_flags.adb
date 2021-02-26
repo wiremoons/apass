@@ -25,15 +25,23 @@ package body Cmd_Flags is
    begin
       --  define params for the 'help' option
       Define_Switch
-        (Config, Help_Option'Access, Switch => "-h", Long_Switch => "--help",
-         Help                               => "Show command line usage for application");
+        (Config,
+         Help_Option'Access,
+         Switch      => "-h",
+         Long_Switch => "--help",
+         Help        => "Show command line usage for application");
       --  define params for the 'version' option
       Define_Switch
-        (Config, Version_Option'Access, Switch => "-v", Long_Switch => "--version", Help => "Show version details");
+        (Config,
+         Version_Option'Access,
+         Switch      => "-v",
+         Long_Switch => "--version",
+         Help        => "Show version details");
       --  Additional help message as first line of 'Display_Help()'
       Set_Usage
-        (Config, Usage => "[switches] [arguments]",
-         Help          => "Program to generate passwords from random three letter words.");
+        (Config,
+         Usage => "[switches] [arguments]",
+         Help  => "Program to generate passwords from random three letter words.");
 
       --  cli flags parse using config and above defined switched
       Getopt (Config);
@@ -65,7 +73,8 @@ package body Cmd_Flags is
       when Invalid_Parameter =>
          New_Line (1);
          Put_Line
-           (Standard_Error, "Exception caught: caused by the use of an invalid parameter to a command line switch.");
+           (Standard_Error,
+            "Exception caught: caused by the use of an invalid parameter to a command line switch.");
          New_Line (1);
          Display_Help (Config);
          return True;

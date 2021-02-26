@@ -27,7 +27,8 @@ begin
    pragma Debug
      (Put_Line (Standard_Error, "[DEBUG] build a 'release' version with: gprclean && gprbuild -XBUILD=release"));
 
-   --  Check if any cmmand line options were used
+   --  Check if any command line options were used and if they are they will be executed 
+   --  and then the program can exit here
    if Cmd_Flags.Command_Line_Flags_Exist then
       Set_Exit_Status (Success);
       pragma Debug (Put_Line (Standard_Error, "[DEBUG] exit with 'success'."));
@@ -35,7 +36,7 @@ begin
 
    else
       --  Set_Exit_Status (Failure); -- failed as no database found
-      --pragma Debug (Put_Line (Standard_Error, "[DEBUG] exit with 'failure'."));
+      --  pragma Debug (Put_Line (Standard_Error, "[DEBUG] exit with 'failure'."));
 
       Put_Line ("Program 'apass' running...");
       Put_Line ("Total words available to construct passwords: " & Password_Manager.Total_Words);
