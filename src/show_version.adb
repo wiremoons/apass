@@ -32,8 +32,7 @@ package body Show_Version is
    -- Set if in debug build
    --------------------------------------
    begin
-      --  Only gets called if program is compiled as a 'debug' build
-      --  so variable only set 'true' if this is the case
+      --  Only gets called if program is compiled as a 'debug' build so variable only set 'true' if this is the case
       Is_Debug := True;
    end Set_Debug;
 
@@ -73,10 +72,9 @@ package body Show_Version is
       --  Delete all leading text up to and including '=' leaving:
       --    "Ubuntu 20.04.1 LTS"
       --
-      --  This is then further cleaned up to remove both '"' characters which
-      --  are defined in the 'Quote_Char' Character_Set. The cleaned up text is
-      --  modified in place using the provided Unbounded.String resulting in a
-      --  final string of (or equivalent for other PRETTY_NAME entries):
+      --  This is then further cleaned up to remove both '"' characters which are defined in the 'Quote_Char'
+      --  Character_Set. The cleaned up text is modified in place using the provided Unbounded.String resulting in
+      --  a final string of (or equivalent for other PRETTY_NAME entries):
       --    Ubuntu 20.04.1 LTS
 
       Quote_Char : constant Character_Set := To_Set ('"'); --\""
@@ -101,9 +99,8 @@ package body Show_Version is
       --  This file includes many entries but should have the line:
       --     PRETTY_NAME="Ubuntu 20.04.1 LTS"
 
-      --  The file is opened and read until the above line is located. The
-      --  line is then cleaned up in the procedure 'Clean_Pretty_Name'. The
-      --  remaining text should jus be:
+      --  The file is opened and read until the above line is located. The line is then cleaned up in the procedure
+      --  'Clean_Pretty_Name'. The remaining text should jus be:
       --     Ubuntu 20.04.1 LTS
       --  that is returned as a String.
 
