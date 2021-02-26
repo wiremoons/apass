@@ -112,6 +112,14 @@ package body Password_Manager is
 
       pragma Debug (Put_Line (Standard_Error, "[DEBUG] final password: " & Final_Password));
 
+      --  reset screen outputs to known default - otherwise Windows outputs first displayed password
+      --  with a bold white background - rest here fixes that.
+      if Screen.Has_Colors then
+         Set_Color
+           (Self => Screen, Term => Standard_Output, Style => Reset_All, Foreground => Reset, Background => Reset);
+         pragma Debug (Put_Line (Standard_Error, "[DEBUG] Reset : 'Set_Color'"));
+      end if;
+
       for C in Final_Password'Range loop
 
          if Is_Digit (Final_Password (C)) then
@@ -125,8 +133,8 @@ package body Password_Manager is
                Put (Final_Password (C));
             end if;
          elsif Is_Punctuation_Connector (Final_Password (C)) or Is_Special (Final_Password (C)) then
-            --  outut of punctuation characters including '_'
-            --  pragma Debug (Put (Standard_Error, " [DEBUG] MARK: " & Final_Password (C)));
+            --  outut of punctuation characters including '_' pragma Debug (Put (Standard_Error, " [DEBUG] MARK: " &
+            --  Final_Password (C)));
             if Screen.Has_Colors then
                Screen.Set_Fg (Color => Blue, Term => Standard_Output);
                Put (Final_Password (C));
@@ -135,12 +143,12 @@ package body Password_Manager is
                Put (Final_Password (C));
             end if;
          elsif Is_Letter (Final_Password (C)) then
-            --  output of any characters 'a .. z' or 'A .. Z' : NO COLOUR USED
-            --  pragma Debug (Put (Standard_Error, " [DEBUG] LETTER: " & Final_Password (C)));
+            --  output of any characters 'a .. z' or 'A .. Z' : NO COLOUR USED pragma Debug (Put (Standard_Error, "
+            --  [DEBUG] LETTER: " & Final_Password (C)));
             Put (Final_Password (C));
          else
-            --  output of anyting else not covered by the above specifics
-            --  pragma Debug (Put (Standard_Error, " [DEBUG] OTHER: " & Final_Password (C)));
+            --  output of anyting else not covered by the above specifics pragma Debug (Put (Standard_Error, " [DEBUG]
+            --  OTHER: " & Final_Password (C)));
             if Screen.Has_Colors then
                Screen.Set_Fg (Color => Cyan, Term => Standard_Output);
                Put (Final_Password (C));
@@ -155,14 +163,10 @@ package body Password_Manager is
       --Put_Line (" ");
       Put ("   ");
 
-      --  reset screen outputs to snsure back to normal
+      --  reset screen outputs to ensure back to normal
       if Screen.Has_Colors then
          Set_Color
-           (Self       => Screen,
-            Term       => Standard_Output,
-            Style      => Reset_All,
-            Foreground => Reset,
-            Background => Reset);
+           (Self => Screen, Term => Standard_Output, Style => Reset_All, Foreground => Reset, Background => Reset);
          pragma Debug (Put_Line (Standard_Error, "[DEBUG] Reset : 'Set_Color'"));
       end if;
 
