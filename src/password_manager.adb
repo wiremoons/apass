@@ -59,7 +59,7 @@ package body Password_Manager is
 
    function Capitilised_Password (Number_Of_Words : Positive := 3) return String is
       ------------------------------------------------------------------------------------------------------------------
-      --  Capitilised_Password generates a password from the number of words specified by value of function param     --
+      --  Capitalised_Password generates a password from the number of words specified by value of function param     --
       --  Number_of_Words (default 3). Words are title cased and are concatenated into a string that is returned.     --
       ------------------------------------------------------------------------------------------------------------------
 
@@ -127,7 +127,7 @@ package body Password_Manager is
       for C in Final_Password'Range loop
 
          if Is_Digit (Final_Password (C)) then
-            -- ouput of numbers in colour
+            --  output of numbers in colour
             --  pragma Debug (Put (Standard_Error, " [DEBUG] DIGIT: " & Final_Password (C)));
             if Screen.Has_Colors then
                Screen.Set_Fg (Color => Green, Term => Standard_Output);
@@ -137,7 +137,7 @@ package body Password_Manager is
                Put (Final_Password (C));
             end if;
          elsif Is_Punctuation_Connector (Final_Password (C)) or Is_Special (Final_Password (C)) then
-            --  outut of punctuation characters including '_' pragma Debug (Put (Standard_Error, " [DEBUG] MARK: " &
+            --  output of punctuation characters including '_' pragma Debug (Put (Standard_Error, " [DEBUG] MARK: " &
             --  Final_Password (C)));
             if Screen.Has_Colors then
                Screen.Set_Fg (Color => Blue, Term => Standard_Output);
@@ -151,7 +151,7 @@ package body Password_Manager is
             --  [DEBUG] LETTER: " & Final_Password (C)));
             Put (Final_Password (C));
          else
-            --  output of anyting else not covered by the above specifics pragma Debug (Put (Standard_Error, " [DEBUG]
+            --  output of anything else not covered by the above specifics pragma Debug (Put (Standard_Error, " [DEBUG]
             --  OTHER: " & Final_Password (C)));
             if Screen.Has_Colors then
                Screen.Set_Fg (Color => Cyan, Term => Standard_Output);
