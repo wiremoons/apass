@@ -26,7 +26,7 @@ the offer passwords and more command line options to manage this are to be done.
 
 Current default output from a screen shot is as follows:
 
-[](./imgs/screenshot1.png)
+![apass screenshot](imgs/screenshot1.png)
 
 
 ## Usage Examples
