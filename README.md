@@ -21,6 +21,13 @@ not been tested.
 
 **INCOMPLETE** : WORK IN PROGRESS
 
+Basics of the program are in place and it is producing passwords. Work continues to improve 
+the offer passwords and more command line options to manage this are to be done.
+
+Current default output from a screen shot is as follows:
+
+[](./imgs/screenshot1.png)
+
 
 ## Usage Examples
 
